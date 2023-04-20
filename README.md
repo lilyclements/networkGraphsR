@@ -1,0 +1,36 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# networkGraphsR
+
+<!-- badges: start -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/IDEMSInternational/networkGraphsR/workflows/R-CMD-check/badge.svg)](https://github.com/IDEMSInternational/rpicsa/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/IDEMSInternational/networkGraphsR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/IDEMSInternational/rpicsa?branch=main)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![license](https://img.shields.io/badge/license-LGPL%20(%3E=%203)-lightgrey.svg)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
+<!-- badges: end -->
+
+The goal of networkGraphsR is to …
+
+## Installation
+
+You can install the development version of networkGraphsR from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("IDEMSInternational/networkGraphsR")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+library(networkGraphsR)
+## basic example code
+```
