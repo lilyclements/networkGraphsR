@@ -4,7 +4,7 @@ initiative_by <- function(initiative_data, by = "pays", filter_var = NULL, filte
                           font_family = "serif", link_distance = 50, link_width = JS("function(d) { return Math.sqrt(d.value); }"),
                           radius_calculation = "4*Math.sqrt(d.nodesize)+2", charge = -30,
                           link_colour = "#666", opacity = 0.6, zoom = FALSE, arrows = FALSE,
-                          bounded = FALSE, opacity_no_hover = 0, click_action = NULL){
+                          bounded = FALSE, display_labels = 0, click_action = NULL){
   node_size <- match.arg(node_size)
   #  if (!is.null(filter_var)){
   #    initiative_data <- initiative_data %>%
@@ -74,6 +74,12 @@ initiative_by <- function(initiative_data, by = "pays", filter_var = NULL, filte
               by = c("id_init"="id")) %>% 
     select(c(target, source))
   
+  if (display_labels) {
+    display_labels = 1
+  } else {
+    display_labels = 0
+  }
+  
   # Nodesize = type_weight, age_weight
   if (is.null(group)){
     forceNetwork(Links = links_init_by, Nodes = nodes_init_by,
@@ -87,7 +93,7 @@ initiative_by <- function(initiative_data, by = "pays", filter_var = NULL, filte
                  linkDistance = link_distance, linkWidth = link_width,
                  radiusCalculation = radius_calculation, charge = charge,
                  linkColour = link_colour, opacity = opacity, zoom = zoom,
-                 arrows = arrows, bounded = bounded, opacityNoHover = opacity_no_hover,
+                 arrows = arrows, bounded = bounded, opacityNoHover = display_labels,
                  clickAction = click_action)
   } else {
     forceNetwork(Links = links_init_by, Nodes = nodes_init_by, 
@@ -101,7 +107,7 @@ initiative_by <- function(initiative_data, by = "pays", filter_var = NULL, filte
                  linkDistance = link_distance, linkWidth = link_width,
                  radiusCalculation = radius_calculation, charge = charge,
                  linkColour = link_colour, opacity = opacity, zoom = zoom,
-                 arrows = arrows, bounded = bounded, opacityNoHover = opacity_no_hover,
+                 arrows = arrows, bounded = bounded, opacityNoHover = display_labels,
                  clickAction = click_action)
   }
 }
@@ -111,7 +117,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
                            font_family = "serif", link_distance = 50, link_width = JS("function(d) { return Math.sqrt(d.value); }"),
                            radius_calculation = "4*Math.sqrt(d.nodesize)+2", charge = -30,
                            link_colour = "#666", opacity = 0.6, zoom = FALSE, arrows = FALSE,
-                           bounded = FALSE, opacity_no_hover = 0, click_action = NULL){
+                           bounded = FALSE, display_labels = 0, click_action = NULL){
   #  if (!is.null(filter_var)){
   #    individual_data <- individual_data %>%
   #      filter(.data[[filter_var]] %in% filter_vals) 
@@ -123,7 +129,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
   
   # put this if statement elsewhere - own function
   # replace "other" columns with what the user selected:
-  if (!is.null(group)){
+  if (group %in% c("pays", "activite_prof")){
     if (group == "pays") {
       group_other_name = "autre_pays"
     } else if (group %in% c("activite_prof")){
@@ -134,6 +140,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
                          group_other_name = group_other_name,
                          RAS = TRUE)
   }
+  
   ind <- replace_other(data = ind,
                        group = "institutions_associees",
                        group_other_name = "autre")
@@ -223,6 +230,12 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
       inst_init_type == "Initiative" ~ '1')) %>%
     select(c(target, source, inst_init_type, inst_init_type_weight))
   
+  if (display_labels) {
+    display_labels = 1
+  } else {
+    display_labels = 0
+  }
+  
   if (is.null(group)){
     forceNetwork(Links = links_init_by,
                  Nodes = nodes_init_by,
@@ -238,7 +251,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
                  linkDistance = link_distance, linkWidth = link_width,
                  radiusCalculation = radius_calculation, charge = charge,
                  linkColour = link_colour, opacity = opacity, zoom = zoom,
-                 arrows = arrows, bounded = bounded, opacityNoHover = opacity_no_hover,
+                 arrows = arrows, bounded = bounded, opacityNoHover = display_labels,
                  clickAction = click_action)
   } else {
     forceNetwork(Links = links_init_by,
@@ -255,7 +268,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
                  linkDistance = link_distance, linkWidth = link_width,
                  radiusCalculation = radius_calculation, charge = charge,
                  linkColour = link_colour, opacity = opacity, zoom = zoom,
-                 arrows = arrows, bounded = bounded, opacityNoHover = opacity_no_hover,
+                 arrows = arrows, bounded = bounded, opacityNoHover = display_labels,
                  clickAction = click_action)
   }
 }
