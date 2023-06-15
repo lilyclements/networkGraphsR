@@ -53,7 +53,7 @@ initiative_by <- function(initiative_data, by = "pays", sep = ".", filter_var = 
       dplyr::mutate(CCRP = case_when(
         paste0("donateur", sep, "ccrp_mcknight_foundation") == 1 ~ group, 
         TRUE   ~ "autre"))
-  }
+  } 
   # Creation of age column
   if (node_size == "age"){
     init <- init %>% dplyr::mutate(age = 2023 - date_creation)
