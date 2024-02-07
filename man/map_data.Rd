@@ -4,7 +4,7 @@
 \alias{map_data}
 \title{Map Data for Network Visualisation}
 \usage{
-map_data(data, values, node_values)
+map_data(data, values, node_values, colour_values = NULL)
 }
 \arguments{
 \item{data}{The original data frame.}
@@ -24,13 +24,17 @@ and creates links between them.
 \examples{
 # An example with simple data 
 df_original <- data.frame(initiative = c("A", "B", "C", "D"),
-                          country = c("BF", "BF Niger", "Niger", "Niger"))
+                          country = c("BF", "BF Niger", "Niger", "Niger"),
+                          ex = c("a b", "a b", "a", "b"))
 map_data(df_original, "initiative", "country")
+map_data(df_original, "initiative", "country", "ex")
+map_data(df_original, "initiative", c("country", "ex"), "ex")
 
 
 df_original2 <- data.frame(individuals = c("A", "B", "C", "D"),
                            institutions = c("a b", "a", "a", "b c"),
                            initiatives = c("z", "z", "y z", "y"))
 map_data(df_original2, "individuals", c("institutions", "initiatives"))
+map_data(df_original2, "individuals", c("institutions", "initiatives"), "institutions")
 
 }
