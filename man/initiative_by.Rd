@@ -7,6 +7,7 @@
 initiative_by(
   initiative_data,
   by = "pays",
+  sep = ".",
   filter_var = NULL,
   filter_vals = NULL,
   node_size = c("type", "age"),
@@ -32,47 +33,16 @@ initiative_by(
 \arguments{
 \item{initiative_data}{a data frame object containing the initiative data}
 
-\item{by}{}
+\item{by}{the values around which nodes are formed}
 
-\item{filter_var}{}
+\item{filter_var}{filtered variable}
 
-\item{filter_vals}{}
+\item{filter_vals}{values associated to the filter}
 
 \item{node_size}{character string specifying the a column in the \code{initiative_data} data frame with some value to vary the node radius's with. See also \code{radiusCalculation}.}
 
 \item{group}{character string specifying the group of each node in the \code{initiative_data} data frame.}
 
-\item{font_size}{}
-
-\item{height}{}
-
-\item{width}{}
-
-\item{colour_scale}{}
-
-\item{font_family}{}
-
-\item{link_distance}{}
-
-\item{link_width}{}
-
-\item{radius_calculation}{}
-
-\item{charge}{}
-
-\item{link_colour}{}
-
-\item{opacity}{}
-
-\item{zoom}{}
-
-\item{arrows}{}
-
-\item{bounded}{}
-
-\item{display_labels}{}
-
-\item{click_action}{}
 }
 \value{
 Returns a network graph object
