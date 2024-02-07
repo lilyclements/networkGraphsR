@@ -36,6 +36,7 @@ map_data <- function(data, values, node_values) {
     tidyr::pivot_longer(cols = c({{ values }}, {{ node_values }}),
                         names_to = "group",
                         values_to = "id") %>%
+    dplyr::select(c(id, group)) %>%
     dplyr::arrange(group) %>%
     dplyr::distinct() %>%
     dplyr::mutate(id_index = row_number() - 1)
