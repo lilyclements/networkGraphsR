@@ -27,7 +27,6 @@
 #' @param click_action 
 #'
 #' @return Returns a network graph object
-#' @export
 #'
 #' @examples # todo
 initiative_by <- function(initiative_data, by = "pays", filter_var = NULL, filter_vals = NULL,
