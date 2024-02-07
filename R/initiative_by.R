@@ -27,7 +27,6 @@
 #' @param click_action character string with a JavaScript expression to evaluate when a node is clicked.
 #'
 #' @return Returns a network graph object
-#' @export
 #'
 #' @examples # todo
 initiative_by <- function(initiative_data, by = "pays", sep = ".", filter_var = NULL, filter_vals = NULL,

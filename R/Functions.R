@@ -272,6 +272,7 @@ individuals_by <- function(individual_data = individuals, ind_id = nom, group = 
                  clickAction = click_action)
   }
 }
+
 replace_other <- function(data = individuals, group = NULL, group_other = paste0("autre_", group), group_other_name = NULL, RAS = FALSE){
   group_var <- group
   # if (group_other == "autre_pays"){
