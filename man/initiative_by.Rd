@@ -43,6 +43,37 @@ initiative_by(
 
 \item{group}{character string specifying the group of each node in the \code{initiative_data} data frame.}
 
+\item{font_size}{numeric font size in pixels for the node text labels.}
+
+\item{height}{numeric height for the network graph's frame area in pixels.}
+
+\item{width}{numeric width for the network graph's frame area in pixels.}
+
+\item{colour_scale}{character string specifying the categorical colour scale for the nodes. See https://github.com/d3/d3/blob/master/API.md#ordinal-scales.}
+
+\item{font_family}{font family for the node text labels.}
+
+\item{link_distance}{numeric or character string. Either numberic fixed distance between the links in pixels (actually arbitrary relative to the diagram's size). Or a JavaScript function, possibly to weight by Value. For example: linkDistance = JS("function(d){return d.value * 10}").}
+
+\item{link_width}{numeric or character string. Can be a numeric fixed width in pixels (arbitrary relative to the diagram's size). Or a JavaScript function, possibly to weight by Value. The default is linkWidth = JS("function(d) { return Math.sqrt(d.value); }").}
+
+\item{radius_calculation}{character string. A javascript mathematical expression, to weight the radius by Nodesize. The default value is radiusCalculation = JS("Math.sqrt(d.nodesize)+6").}
+
+\item{charge}{numeric value indicating either the strength of the node repulsion (negative value) or attraction (positive value).}
+
+\item{link_colour}{character vector specifying the colour(s) you want the link lines to be. Multiple formats supported (e.g. hexadecimal).}
+
+\item{opacity}{numeric value of the proportion opaque you would like the graph elements to be.}
+
+\item{zoom}{logical value to enable (TRUE) or disable (FALSE) zooming.}
+
+\item{arrows}{logical value to enable directional link arrows.}
+
+\item{bounded}{logical value to enable (TRUE) or disable (FALSE) the bounding box limiting the graph's extent. See http://bl.ocks.org/mbostock/1129492.}
+
+\item{display_labels}{}
+
+\item{click_action}{character string with a JavaScript expression to evaluate when a node is clicked.}
 }
 \value{
 Returns a network graph object
