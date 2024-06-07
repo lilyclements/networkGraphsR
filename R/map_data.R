@@ -32,50 +32,52 @@ map_data <- function(data, values, node_values, colour_values = NULL) {
   # separate_longer_delim doesn't repeat for each col, but groups
   for (i in node_values){
     data <- data %>%
-      separate_longer_delim(cols = {{ i }}, " ")
+      tidyr::separate_longer_delim(cols = {{ i }}, " ")
   }
   
   # Step 1: Expand data for df_output_1
   df_expanded <- data %>%
-    pivot_longer(cols = c({{ values }}, {{ node_values }}),
-                 names_to = "group",
-                 values_to = "id") %>%
+    tidyr::pivot_longer(cols = c({{ values }}, {{ node_values }}),
+                        names_to = "group",
+                        values_to = "id") %>%
     dplyr::select(c("id", "group")) %>%
-    arrange(group)
+    dplyr::arrange(group)
   
   if (is.null(colour_values)){ 
     df_expanded <- df_expanded %>%
       dplyr::distinct() %>%
-      dplyr::mutate(id_index = row_number() - 1) %>%
-      rename(group_type = group) 
+      dplyr::mutate(id_index = dplyr::row_number() - 1) %>%
+      dplyr::rename(group_type = group) 
   } else {
     data_1 <- data %>%
       dplyr::select(c(id = {{ values }}, group_type = {{ colour_values }}))
     df_expanded <- df_expanded %>%
-      left_join(data_1, by = "id") %>%
+      dplyr::left_join(data_1, by = "id") %>%
       #rename(group_type = {{ colour_values }}) %>%
       dplyr::distinct() %>%
-      dplyr::mutate(id_index = row_number() - 1) %>%
+      dplyr::mutate(id_index = dplyr::row_number() - 1) %>%
       dplyr::mutate(group_type = ifelse(is.na(group_type), group, group_type))
   }
   
   # Step 2: Create df_output_2
   df_mapped <- data %>%
     dplyr::left_join(df_expanded, by = setNames("id", values)) %>%
-    rename(source = id_index) 
+    dplyr::rename(source = id_index) 
   
+  print("A")
   df_mapped <- df_mapped %>%
-    pivot_longer(cols = all_of({{ node_values }}), values_to = "id") %>%
-    distinct %>%
+    tidyr::pivot_longer(cols = all_of({{ node_values }}), values_to = "id") %>%
+    dplyr::distinct() %>%
     dplyr::left_join(df_expanded, by = "id") %>%
-    rename(target = id_index)
+    dplyr::rename(target = id_index)
+  print("B")
   
   df_mapped <- df_mapped %>%
     dplyr::select(c(target, source))
   
-  return(forceNetwork(Links = df_mapped, Nodes = df_expanded,
-                      Source = "source", Target = "target",
-                      NodeID = "id",
-                      Group = "group_type",
-                      legend = TRUE))
+  return(networkD3::forceNetwork(Links = df_mapped, Nodes = df_expanded,
+                                 Source = "source", Target = "target",
+                                 NodeID = "id",
+                                 Group = "group_type",
+                                 legend = TRUE))
 }
