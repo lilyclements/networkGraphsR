@@ -3,5 +3,7 @@
 export("%>%")
 export(individuals_by)
 export(map_data)
+export(plot_hierarchy_network)
+export(replace_ids_with_labels)
 export(replace_other)
 importFrom(magrittr,"%>%")
