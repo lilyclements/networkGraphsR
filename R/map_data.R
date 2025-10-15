@@ -38,9 +38,10 @@ map_data <- function(data, values, node_values, colour_values = NULL) {
   # Step 1: Expand data for df_output_1
   df_expanded <- data %>%
     tidyr::pivot_longer(cols = c({{ values }}, {{ node_values }}),
-                        names_to = "group",
-                        values_to = "id") %>%
+                 names_to = "group",
+                 values_to = "id") %>%
     dplyr::select(c("id", "group")) %>%
+    dplyr::distinct() %>%
     dplyr::arrange(group)
   
   if (is.null(colour_values)){ 
@@ -58,26 +59,23 @@ map_data <- function(data, values, node_values, colour_values = NULL) {
       dplyr::mutate(id_index = dplyr::row_number() - 1) %>%
       dplyr::mutate(group_type = ifelse(is.na(group_type), group, group_type))
   }
-  
+
   # Step 2: Create df_output_2
   df_mapped <- data %>%
     dplyr::left_join(df_expanded, by = setNames("id", values)) %>%
     dplyr::rename(source = id_index) 
   
-  print("A")
   df_mapped <- df_mapped %>%
     tidyr::pivot_longer(cols = all_of({{ node_values }}), values_to = "id") %>%
     dplyr::distinct() %>%
     dplyr::left_join(df_expanded, by = "id") %>%
-    dplyr::rename(target = id_index)
-  print("B")
-  
-  df_mapped <- df_mapped %>%
+    dplyr::rename(target = id_index) %>%
     dplyr::select(c(target, source))
   
   return(networkD3::forceNetwork(Links = df_mapped, Nodes = df_expanded,
-                                 Source = "source", Target = "target",
-                                 NodeID = "id",
-                                 Group = "group_type",
-                                 legend = TRUE))
+                      Source = "source", Target = "target",
+                      NodeID = "id",
+                      Group = "group_type",
+                      legend = TRUE,
+                    bounded = TRUE))
 }

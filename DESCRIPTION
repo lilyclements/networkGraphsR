@@ -1,10 +1,10 @@
 Package: networkGraphsR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: A set of functions that provide tools for creating interactive network visualisations
+Version: 0.0.3
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: A set of functions that provide tools for creating interactive network visualisations and managing categorical group data. It simplifies the process of analysing relationships and connections between entities such as initiatives, individuals, institutions, and associated attributes. The package offers customisable visualisations with adjustable node sizes, link distances, colours, and interactivity, making it ideal for exploratory data analysis and presentation of complex relational datasets.
 License: LGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
