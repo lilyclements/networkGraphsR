@@ -3,8 +3,6 @@ stored_password <- read.table("pass.txt")[1,]
 
 # ---- Credentials ----
 user <- "lily@idems.international"
-svc_initiatives <- "https://odk.idems.international/v1/projects/13/forms/idems_activities_create_initiative.svc"
-svc_people      <- "https://odk.idems.international/v1/projects/13/datasets/people.svc"
 
 ## UI -----------------------------------------------------------------------------------------------------
 ui <- shinydashboard::dashboardPage(
@@ -34,8 +32,6 @@ ui <- shinydashboard::dashboardPage(
 )
 
 # --- Server ---------------------------------------------------------------
-library(httr2)
-
 server <- function(input, output, session) {
 
   raw_data <- shiny::reactive({
@@ -93,8 +89,7 @@ server <- function(input, output, session) {
       dplyr::mutate(
         resp_person = replace_ids_with_labels(people_data, "__id", "label", df, "resp_person"),
         initiatives_children = replace_ids_with_labels(initiatives_entities, "__id", "label", df, "initiatives_children"),
-        parent_initiative    = replace_ids_with_labels(initiatives_entities, "__id", "label", df, "parent_initiative"),
-        `id`               = replace_ids_with_labels(initiatives_entities, "__id", "label", df, "id")
+        parent_initiative    = replace_ids_with_labels(initiatives_entities, "__id", "label", df, "parent_initiative")
       )
     
     df
@@ -123,7 +118,7 @@ server <- function(input, output, session) {
 
     plot_hierarchy_network(
       data = df,
-      id_col = "id",
+      id_col = "name",
       parent_col = "parent_initiative",
       child_col = "initiatives_children",
       group_col = "resp_person",

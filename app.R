@@ -9,6 +9,7 @@ library(rlang)
 library(here)
 library(ruODK)
 library(stringr)
+library(httr2)
 
 source(here("R/replace_ids_with_labels.R"))
 source(here("R/plot_hierarchy_network.R"))

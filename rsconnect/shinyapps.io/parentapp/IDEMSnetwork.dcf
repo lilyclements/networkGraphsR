@@ -1,0 +1,12 @@
+name: IDEMSnetwork
+title: IDEMSnetwork
+username: parentapp
+account: parentapp
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15767867
+bundleId: 11040041
+url: https://parentapp.shinyapps.io/IDEMSnetwork/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
